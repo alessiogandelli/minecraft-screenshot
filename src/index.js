@@ -25,8 +25,10 @@ async function invia(msg) {
 
     //send all screenshots
     const dir = await fs.promises.opendir(path);
+
+    //send files in the server
     for await (const file of dir) {
-        console.log('pipo')
+  
         if(file.name !== '.DS_Store'){
           
             msg.channel.send( {files: [path + file.name]});
