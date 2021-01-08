@@ -21,10 +21,11 @@ client.on('message', (msg) => {
 
 client.on('voiceStateUpdate', (oldState, newState) => {
     // Here I'm storing the IDs of their voice channels, if available
-  
-
-    client.channels.cache.get(`699347545708691548`).send(`ue stronzi qui si crafta`);
-  
+    oldChannel = oldState.channelID;
+    newChannel = newState.channelID;
+    
+    if(oldChannel != newChannel && newChannel == '699347545708691549')
+        client.channels.cache.get(`699347545708691548`).send(`ue stronzi qui si crafta`);
   });
 
 client.login(token);
