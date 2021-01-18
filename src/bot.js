@@ -4,12 +4,17 @@ const mv = require('mv');
 const dotenv  = require('dotenv');
 
 dotenv.config()
-const client = new Discord.Client();
-const token =  process.env.TOKEN ;
+const CLIENT = new Discord.Client();
+const TOKEN =  process.env.TOKEN ;
+const GENERALE = client.channels.get(process.env.GENERALE_CHANNEL_ID)
+const SCREENSHOTS = client.channels.get(process.env.GENERALE_CHANNEL_ID)
+
 
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+
+   
 });
 
 client.on('message', (msg) => {
@@ -20,10 +25,16 @@ client.on('message', (msg) => {
 })
 
 client.on('voiceStateUpdate', (oldState, newState) => {
-    // Here I'm storing the IDs of their voice channels, if available
+   
   
 
-    client.channels.cache.get(`699347545708691548`).send(`ue stronzi qui si crafta`);
+    GENERALE.send(`ue stronzi qui si crafta`);
+    console.log(newState)
+
+
+
+    // client.channels.cache.get(`779018430350622811`).send('magi tartufi');
+    // console.log(client.channels.cache.get(`779018430350622811`))
   
   });
 
@@ -43,7 +54,8 @@ async function invia( msg) {
         if(file.name !== '.DS_Store'){
             size += 1;
             msg.channel.send( {files: [path + file.name]});
-            client.channels.cache.get(`788587691352522795`).send(`ho inviato ${file.name} `);
+            GENERALE.send(`ho inviato ${file.name} `);
+
         }
     }
     
@@ -54,7 +66,7 @@ async function invia( msg) {
             mv(path+file.name, dest+file.name, function(err) {
                 console.log(err)
             });
-            client.channels.cache.get(`788587691352522795`).send(`ho spostato ${file.name} `);
+            LOG.send(`ho spostato ${file.name} `);
         }
     }
 
