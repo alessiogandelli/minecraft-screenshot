@@ -3,12 +3,15 @@ const fs = require('fs');
 const mv = require('mv');
 const dotenv  = require('dotenv');
 
+
 dotenv.config()
 const client = new Discord.Client();
 const token =  process.env.TOKEN ;
+
 let GENERALE ;
 let SCREEN;
 let LOG;
+let PIER;
 
 
 
@@ -17,42 +20,60 @@ client.on('ready', () => {
     GENERALE = client.channels.cache.get(process.env.GENERALE_CHANNEL_ID);
     SCREEN = client.channels.cache.get(process.env.SCREENSHOT_CHANNEL_ID);
     LOG = client.channels.cache.get(process.env.LOG_CHANNEL_ID);
+    PIER = client.channels.cache.get(process.env.PIER_CHANNEL_ID);
 });
+
+
 
 client.on('message', (msg) => {
     if(msg.content == 'magi'){
         msg.channel.send('di montecchio (il vecchio del cazzo)');
         invia(msg);    
     }
+    console.log(msg.channel)
+    if(msg.channel == SCREEN){
+        inoltra
+    }
 })
 
 client.on('voiceStateUpdate', (oldState, newState) => {
     
-    oldChannel = oldState.channelID;
-    newChannel = newState.channelID;
+    const oldChannel = oldState.channelID;
+    const newChannel = newState.channelID;
 
     const valzo = 'figa gnari brucia la baita';
     const skuz = 'chi cazzo ha scassato l\'ascensore?';
     const d8eea = 'sono allo spawn e ho perso tutto';
+    const hidra = 'musica maestro';
+    const ospite = 'ma tu chi cazzo sei?';
+
+    const channel = PIER;
+    const vocale = '699347545708691549'
+    let msg;
+    
 
     console.log(newState.member.user.username);
-    if(oldChannel != newChannel && newChannel == '699347545708691549'){
+    if(oldChannel != newChannel && newChannel == vocale){
         if(newState.member.user.username == 'd8eea')
-            GENERALE.send(d8eea);
+            msg = d8eea;
 
         else if(newState.member.user.username == 'Betelgeuse')
-            GENERALE.send(valzo);
+            msg = valzo;
 
         else if(newState.member.user.username == 'SkuZ')
-            GENERALE.send(skuz);
+            msg = skuz;
 
         else if(newState.member.user.username == 'Hydra')
-            GENERALE.send('arriva la musica ');
+            msg = hidra;
 
         else 
-            GENERALE.send('ma tu chi cazzo sei?');
+            msg = ospite;
+
+        channel.send(msg);
     }
   });
+
+
 
 client.login(token);
 
@@ -90,5 +111,6 @@ async function invia( msg) {
         
 }
 
-   
+async function inoltra(){
 
+}
